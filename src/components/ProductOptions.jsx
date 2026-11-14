@@ -4,6 +4,7 @@ export default function ProductOptions({
   options,
   shape = 'square',
   radius = '4px',
+  type = shape === 'circle' ? 'color' : 'text',
 }) {
   const [selected, setSelected] = useState(null)
 
@@ -13,20 +14,20 @@ export default function ProductOptions({
         <button
           key={option}
           type="button"
-          className={`product-option ${shape} ${
+          className={`product-option ${shape} option-${type} ${
             selected === option ? 'selected' : ''
           }`}
           style={{
             borderRadius: shape === 'circle' ? '50%' : radius,
-            backgroundColor: shape === 'circle' ? option : undefined,
+            backgroundColor: type === 'color' ? option : undefined,
           }}
           aria-label={
-            shape === 'circle' ? `Cor ${option}` : `Tamanho ${option}`
+            type === 'color' ? `Cor ${option}` : `Tamanho ${option}`
           }
           aria-pressed={selected === option}
           onClick={() => setSelected(option)}
         >
-          {shape === 'square' ? option : null}
+          {type === 'text' ? option : null}
         </button>
       ))}
     </div>

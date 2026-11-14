@@ -1,12 +1,21 @@
+import '../home-banner.css'
 import { Link } from 'react-router-dom'
 import Gallery from '../components/Gallery'
 import ProductListing from '../components/ProductListing'
 import Section from '../components/Section'
 import { products } from '../data/products'
+import CategoryMenu from '../components/CategoryMenu'
+import SpecialOffer from '../components/SpecialOffer'
 
-const slides = Array.from({ length: 8 }, (_, index) => ({
-  src: `/home-slide-${index + 1}.jpeg`,
-  alt: `Destaque da loja ${index + 1}`,
+const slides = [
+  'Queima de estoque Nike 🔥',
+  'Estilo para acompanhar seus passos',
+  'Seu próximo tênis favorito está aqui',
+  'Encontre seu novo visual',
+].map((title) => ({
+  src: '/tenis-banner.png',
+  alt: 'Tênis branco com detalhes vermelhos',
+  title,
 }))
 
 const collections = [
@@ -27,11 +36,42 @@ const collections = [
 export default function HomePage() {
   return (
     <>
-      <h1 className="home-title">Confira os destaques da Digital Store</h1>
+      <Gallery
+        className="home-gallery"
+        images={slides}
+        width={1440}
+        height={681}
+        radius="0px"
+        showDots
+        renderSlide={(slide) => (
+          <div className="hero-slide">
+            <div className="hero-copy">
+              <p className="hero-eyebrow">
+                Melhores ofertas personalizadas
+              </p>
 
-      <Gallery images={slides} width={1440} height={681} />
+              <h1>{slide.title}</h1>
 
-      <Section title="Coleções em destaque" titleAlign="center">
+              <p className="hero-description">
+                Conforto e estilo para acompanhar sua rotina.
+                Confira os produtos e encontre seu próximo favorito.
+              </p>
+
+              <Link to="/products" className="button hero-button">
+                Ver Ofertas
+              </Link>
+            </div>
+
+            <img
+              className="hero-shoe"
+              src={slide.src}
+              alt={slide.alt}
+            />
+          </div>
+        )}
+      />
+
+      <Section title="Coleções em destaque">
         <div className="collections-grid">
           {collections.map((collection) => (
             <Link
@@ -45,12 +85,18 @@ export default function HomePage() {
         </div>
       </Section>
 
+      <Section title="Coleções em destaque" titleAlign="center">
+        <CategoryMenu />
+      </Section>
+
       <Section
         title="Produtos em alta"
         link={{ text: 'Ver todos', href: '/products' }}
       >
-        <ProductListing products={products.slice(0, 8)} />
+                <ProductListing products={products.slice(0, 8)} />
       </Section>
+
+      <SpecialOffer />
     </>
   )
 }

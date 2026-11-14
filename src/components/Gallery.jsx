@@ -8,21 +8,26 @@ export default function Gallery({
   height = 681,
   radius = '4px',
   showThumbs = false,
+  showDots = false,
+  renderSlide,
   className = '',
 }) {
   const [current, setCurrent] = useState(0)
+
+  const slideWidth = Number.parseFloat(width)
+  const slideHeight = Number.parseFloat(height)
 
   if (!images.length) return null
 
   return (
     <div
       className={`gallery ${className}`}
-      style={{ maxWidth: `${width}px` }}
+      style={{ '--gallery-width': `${slideWidth}px` }}
     >
       <div
         className="gallery-viewport"
         style={{
-          aspectRatio: `${width} / ${height}`,
+          '--gallery-ratio': `${slideWidth} / ${slideHeight}`,
           borderRadius: radius,
         }}
       >
@@ -31,12 +36,21 @@ export default function Gallery({
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
           {images.map((image, index) => (
-            <img
-              key={image.src}
-              src={image.src}
-              alt={image.alt || `Imagem ${index + 1}`}
+            <div
+              key={`${image.src}-${index}`}
+              className="gallery-slide"
               aria-hidden={index !== current}
-            />
+              inert={index !== current}
+            >
+              {renderSlide ? (
+                renderSlide(image, index)
+              ) : (
+                <img
+                  src={image.src}
+                  alt={image.alt || `Imagem ${index + 1}`}
+                />
+              )}
+            </div>
           ))}
         </div>
 
@@ -59,17 +73,33 @@ export default function Gallery({
         >
           <img src={arrowRight} alt="" width={20} height={20} />
         </button>
+
+        {showDots && (
+          <div className="gallery-dots">
+            {images.map((image, index) => (
+              <button
+                key={`${image.src}-${index}`}
+                type="button"
+                aria-label={`Ver destaque ${index + 1}`}
+                aria-pressed={current === index}
+                onClick={() => setCurrent(index)}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
-      <p className="gallery-counter" aria-live="polite">
-        {current + 1} / {images.length}
-      </p>
+      {!showDots && (
+        <p className="gallery-counter" aria-live="polite">
+          {current + 1} / {images.length}
+        </p>
+      )}
 
       {showThumbs && (
         <div className="gallery-thumbnails">
           {images.map((image, index) => (
             <button
-              key={image.src}
+              key={`${image.src}-${index}`}
               type="button"
               className={`gallery-thumbnail ${
                 current === index ? 'selected' : ''

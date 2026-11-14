@@ -23,6 +23,14 @@ const socialLinks = [
   },
 ]
 
+const categories = [
+  { text: 'Camisetas', link: '/products?filter=camiseta' },
+  { text: 'Calças', link: '/products?filter=calça' },
+  { text: 'Bonés', link: '/products?filter=boné' },
+  { text: 'Headphones', link: '/products?filter=fone' },
+  { text: 'Tênis', link: '/products?filter=tênis' },
+]
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -33,8 +41,9 @@ export default function Footer() {
           </Link>
 
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Conforto e estilo para acompanhar você em todos os momentos.
+            Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et
+            dolore.
           </p>
 
           <div className="footer-socials">
@@ -58,17 +67,31 @@ export default function Footer() {
         </div>
 
         <Information
-          title="Navegação"
+          title="Informação"
           informations={[
             { text: 'Página inicial', link: '/' },
             { text: 'Produtos', link: '/products' },
+            { text: 'Categorias', link: '/categorias' },
+            { text: 'Meus Pedidos', link: '/pedidos' },
           ]}
+        />
+
+        <Information
+          title="Categorias"
+          informations={categories}
         />
 
         <div className="footer-contact">
           <h2>Contato</h2>
-          <p>Fortaleza, Ceará</p>
-          <p>Loja demonstrativa — projeto educacional.</p>
+
+          <address>
+            Av. Santos Dumont, 1510 - 1º andar - Aldeota,
+            Fortaleza - CE, 60150-161
+          </address>
+
+          <a href="tel:+558530513411">
+            (85) 3051-3411
+          </a>
         </div>
       </div>
 
