@@ -1,6 +1,6 @@
 # Digital Store
 
-Projeto educacional de front-end de uma loja virtual, desenvolvido com React para o curso da Digital College.
+Projeto educacional de front-end de uma loja virtual, desenvolvido com React.
 
 ## Autoria
 
