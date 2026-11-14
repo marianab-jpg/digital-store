@@ -50,7 +50,7 @@ export default function HomePage() {
                 Melhores ofertas personalizadas
               </p>
 
-              <h1>{slide.title}</h1>
+              <h1>{slide.title.replace('Nike 🔥', 'Nike\u00a0🔥')}</h1>
 
               <p className="hero-description">
                 Conforto e estilo para acompanhar sua rotina.

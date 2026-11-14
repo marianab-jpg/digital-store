@@ -202,3 +202,45 @@
     margin: 0 auto;
   }
 }
+/* Largura da Home sem ultrapassar a janela */
+
+.main:has(> .home-gallery) {
+  max-width: none;
+  padding: 0;
+}
+
+.gallery.home-gallery {
+  width: 100%;
+  margin: 0;
+}
+
+.main:has(> .home-gallery) > .store-section {
+  width: 100%;
+  max-width: 1248px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+.main:has(> .home-gallery) .special-offer {
+  box-shadow: none;
+  clip-path: none;
+}
+
+.main:has(> .home-gallery) .special-offer-content {
+  max-width: 1248px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.hero-copy h1 {
+  max-width: 560px;
+  font-size: clamp(36px, 4vw, 60px);
+}
+
+@media (max-width: 700px) {
+  .hero-copy h1 {
+    font-size: clamp(26px, 8vw, 32px);
+  }
+}
