@@ -1062,3 +1062,141 @@ h1 {
     padding-top: 48px;
   }
 }
+/* Listagem conforme a referência visual */
+
+body {
+  background: #f9f8ff;
+}
+
+.catalog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.catalog-summary {
+  margin: 0;
+  color: #474747;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+.catalog-toolbar .sort-control {
+  width: 308px;
+  max-width: 100%;
+}
+
+.catalog-page .catalog-layout {
+  margin-top: 40px;
+}
+
+.catalog-page .filter-panel {
+  margin-top: 0;
+}
+
+.catalog-page .filter-group {
+  margin-bottom: 24px;
+}
+
+.catalog-page .filter-option {
+  font-size: 14px;
+}
+
+.catalog-results > .store-section > .section-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.clear-filters {
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: #c92071;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .catalog-toolbar .sort-control {
+    width: 100%;
+  }
+}
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  color: #474747;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: #c92071;
+  text-decoration: underline;
+}
+
+.detail-gallery-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.detail-gallery-panel img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-gallery .gallery-thumbnails {
+  margin-top: 20px;
+}
+
+.product-gallery .gallery-thumbnail:nth-child(1) {
+  background: #e2e3ff;
+}
+
+.product-gallery .gallery-thumbnail:nth-child(2) {
+  background: #ffe8bc;
+}
+
+.product-gallery .gallery-thumbnail:nth-child(3) {
+  background: #ffc0bc;
+}
+
+.product-gallery .gallery-thumbnail:nth-child(4) {
+  background: #dec699;
+}
+
+.product-gallery .gallery-thumbnail:nth-child(5) {
+  background: #e8dfcf;
+}
+
+.product-gallery .gallery-counter {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

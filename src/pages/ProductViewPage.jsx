@@ -6,9 +6,16 @@ import ProductOptions from '../components/ProductOptions'
 import Section from '../components/Section'
 import { products } from '../data/products'
 
-const productImages = Array.from({ length: 5 }, (_, index) => ({
-  src: `/produc-image-${index + 1}.jpeg`,
-  alt: `Imagem de demonstração do produto ${index + 1}`,
+const productImages = [
+  '#e2e3ff',
+  '#ffe8bc',
+  '#ffc0bc',
+  '#dec699',
+  '#e8dfcf',
+].map((background, index) => ({
+  src: '/tenis-detalhe.png',
+  alt: `Tênis branco e vermelho — apresentação ${index + 1}`,
+  background,
 }))
 
 export default function ProductViewPage() {
@@ -30,40 +37,59 @@ export default function ProductViewPage() {
 
   return (
     <>
-      <section>
-        <Link to="/products" className="back-link">
-          ← Voltar para os produtos
-        </Link>
+      <nav className="breadcrumbs" aria-label="Caminho de navegação">
+        <Link to="/">Home</Link>
+        <span aria-hidden="true">/</span>
 
-        <div className="product-details">
-          <Gallery
-            key={product.id}
-            images={productImages}
-            width={700}
-            height={570}
-            radius="4px"
-            showThumbs
+        <Link to="/products">Produtos</Link>
+        <span aria-hidden="true">/</span>
+
+        <span aria-current="page">{product.name}</span>
+      </nav>
+
+      <section className="product-details">
+        <Gallery
+          key={`gallery-${product.id}`}
+          className="product-gallery"
+          images={productImages}
+          width={700}
+          height={570}
+          radius="4px"
+          showThumbs
+          renderSlide={(image) => (
+            <div
+              className="detail-gallery-panel"
+              style={{ backgroundColor: image.background }}
+            >
+              <img src={image.src} alt={image.alt} />
+            </div>
+          )}
+        />
+
+        <BuyBox
+          key={`buybox-${product.id}`}
+          name={product.name}
+          reference={product.id}
+          price={product.price}
+          priceDiscount={product.priceDiscount}
+          description="Conforto e estilo para acompanhar sua rotina.
+            Uma opção versátil para compor seus looks do dia a dia."
+        >
+          <h2>Tamanho</h2>
+
+          <ProductOptions
+            options={['39', '40', '41', '42', '43']}
+            type="text"
           />
 
-          <BuyBox
-            key={product.id}
-            name={product.name}
-            reference={product.id}
-            price={product.price}
-            priceDiscount={product.priceDiscount}
-            description="Conforto e estilo para acompanhar sua rotina.
-              Uma opção versátil para compor seus looks do dia a dia."
-          >
-            <h2>Tamanho</h2>
-            <ProductOptions options={['39', '40', '41', '42', '43']} />
+          <h2>Cor</h2>
 
-            <h2>Cor</h2>
-            <ProductOptions
-              options={['#6FEEFF', '#FF6969', '#5E5E5E', '#6D70B7']}
-              shape="circle"
-            />
-          </BuyBox>
-        </div>
+          <ProductOptions
+            options={['#6FEEFF', '#FF6969', '#5E5E5E', '#6D70B7']}
+            shape="circle"
+            type="color"
+          />
+        </BuyBox>
       </section>
 
       <Section

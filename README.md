@@ -99,3 +99,6 @@ https://github.com/ajuteixeira/client-drip-store
 
 Arquivos de origem das imagens complementares:
 `hero-product.png`, `product.png` e `shoesBanner.svg`.
+A imagem de detalhes foi extraída do PNG incorporado ao arquivo
+`tenis_produto.svg`, do repositório de imagens complementares.
+Ela é compartilhada entre os produtos para demonstrar o layout.
