@@ -3,6 +3,8 @@ import Layout from './pages/Layout'
 import HomePage from './pages/HomePage'
 import ProductListingPage from './pages/ProductListingPage'
 import ProductViewPage from './pages/ProductViewPage'
+import RegisterPage from './pages/RegisterPage'
+import LoginPage from './pages/LoginPage'
 import InfoPage from './pages/InfoPage'
 import './App.css'
 
@@ -29,6 +31,16 @@ function App() {
           />
 
           <Route
+            path="/cadastro"
+            element={<RegisterPage />}
+          />
+
+          <Route
+            path="/login"
+            element={<LoginPage />}
+          />
+
+          <Route
             path="/categorias"
             element={
               <InfoPage
@@ -44,26 +56,6 @@ function App() {
               <InfoPage
                 title="Meus Pedidos"
                 description="A consulta de pedidos está indisponível nesta loja demonstrativa."
-              />
-            }
-          />
-
-          <Route
-            path="/login"
-            element={
-              <InfoPage
-                title="Entrar"
-                description="O acesso a contas está indisponível nesta loja demonstrativa."
-              />
-            }
-          />
-
-          <Route
-            path="/cadastro"
-            element={
-              <InfoPage
-                title="Cadastre-se"
-                description="O cadastro de contas está indisponível nesta loja demonstrativa."
               />
             }
           />

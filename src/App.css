@@ -1200,3 +1200,55 @@ body {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+/* Identificação da pessoa que entrou */
+
+.header-user-account {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.header-user-greeting {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: #474747;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.header-user-greeting svg {
+  flex-shrink: 0;
+  color: #c92071;
+}
+
+.header-user-name {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logout-button {
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: #c92071;
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.logout-button:focus-visible {
+  outline: 2px solid #c92071;
+  outline-offset: 2px;
+}
+
+.form-primary-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}

@@ -1,0 +1,222 @@
+.simple-header {
+  padding: 32px max(24px, calc((100% - 1200px) / 2));
+  background: white;
+}
+
+.simple-header a {
+  display: inline-block;
+}
+
+.register-page {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 16px 0 48px;
+}
+
+.register-page > h1 {
+  margin: 0 0 16px;
+  font-size: 32px;
+}
+
+.form-demo-note {
+  margin: 0 0 24px;
+  color: #666666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.customer-form {
+  display: grid;
+  gap: 16px;
+}
+
+.form-panel {
+  padding: 30px;
+  border-radius: 4px;
+  background: white;
+}
+
+.form-panel h2 {
+  margin: 0 0 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #cccccc;
+  color: #474747;
+  font-size: 16px;
+}
+
+.form-fields {
+  display: grid;
+  gap: 24px;
+}
+
+.form-field {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.form-field > span {
+  color: #474747;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.form-field input {
+  width: 100%;
+  min-width: 0;
+  height: 60px;
+  padding: 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: #f5f5f5;
+  color: #474747;
+}
+
+.form-field input::placeholder {
+  color: #8f8f8f;
+}
+
+.form-field input:focus-visible {
+  outline: 2px solid #c92071;
+  outline-offset: 2px;
+}
+
+.offers-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 16px 0;
+  color: #474747;
+  font-size: 14px;
+  line-height: 1.7;
+  cursor: pointer;
+}
+
+.offers-consent input {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: #c92071;
+}
+
+.form-primary-button {
+  width: 100%;
+  min-height: 48px;
+  padding: 14px 24px;
+  border: 0;
+  border-radius: 8px;
+  background: #c92071;
+  color: white;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-primary-button:hover {
+  background: #991956;
+}
+
+.form-primary-button:focus-visible,
+.offers-consent input:focus-visible {
+  outline: 2px solid #c92071;
+  outline-offset: 4px;
+}
+
+.form-feedback {
+  padding: 16px;
+  border-radius: 4px;
+  background: white;
+  color: #474747;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.form-login-link {
+  color: #c92071;
+}
+
+@media (max-width: 600px) {
+  .form-panel {
+    padding: 24px 16px;
+  }
+
+  .register-page > h1 {
+    font-size: 28px;
+  }
+
+  .simple-header .store-logo {
+    width: 180px;
+  }
+}
+/* Tela de acesso demonstrativo */
+
+.login-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  min-height: 600px;
+  padding: 48px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #b5b6f2, #efefff);
+}
+
+.login-card {
+  min-width: 0;
+  padding: 32px;
+  border-radius: 4px;
+  background: white;
+}
+
+.login-card h1 {
+  margin: 0 0 16px;
+  font-size: 32px;
+}
+
+.login-register-text {
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.login-register-text a,
+.login-home-link {
+  color: #474747;
+  text-decoration: underline;
+}
+
+.login-home-link {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 14px;
+}
+
+.login-illustration {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  object-fit: contain;
+}
+
+@media (max-width: 800px) {
+  .login-page {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    min-height: 480px;
+    padding: 24px;
+  }
+
+  .login-card {
+    padding: 24px 16px;
+  }
+
+  .login-card h1 {
+    font-size: 28px;
+  }
+
+  .login-illustration {
+    display: none;
+  }
+}
