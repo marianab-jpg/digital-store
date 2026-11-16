@@ -5,6 +5,9 @@ import ProductListingPage from './pages/ProductListingPage'
 import ProductViewPage from './pages/ProductViewPage'
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
+import CartPage from './pages/CartPage'
+import CheckoutPage from './pages/CheckoutPage'
+import OrderConfirmationPage from './pages/OrderConfirmationPage'
 import InfoPage from './pages/InfoPage'
 import './App.css'
 
@@ -30,14 +33,17 @@ function App() {
             element={<ProductViewPage />}
           />
 
-          <Route
-            path="/cadastro"
-            element={<RegisterPage />}
-          />
+          <Route path="/cadastro" element={<RegisterPage />} />
+
+          <Route path="/login" element={<LoginPage />} />
+
+          <Route path="/carrinho" element={<CartPage />} />
+
+          <Route path="/checkout" element={<CheckoutPage />} />
 
           <Route
-            path="/login"
-            element={<LoginPage />}
+            path="/compra-realizada/:orderId"
+            element={<OrderConfirmationPage />}
           />
 
           <Route

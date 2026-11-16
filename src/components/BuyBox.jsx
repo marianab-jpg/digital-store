@@ -9,6 +9,8 @@ export default function BuyBox({
   priceDiscount,
   description,
   children,
+  onBuy,
+  buyDisabled = false,
 }) {
   const formatPrice = (value) =>
     value.toLocaleString('pt-BR', {
@@ -27,13 +29,7 @@ export default function BuyBox({
           aria-label={`Nota ${stars} de 5`}
         >
           {stars.toLocaleString('pt-BR')}
-
-          <img
-            src={starIcon}
-            alt=""
-            width={16}
-            height={16}
-          />
+          <img src={starIcon} alt="" width={16} height={16} />
         </span>
 
         <span>({rating} avaliações)</span>
@@ -57,7 +53,12 @@ export default function BuyBox({
 
       {children}
 
-      <button type="button" className="buy-button">
+      <button
+        type="button"
+        className="buy-button"
+        onClick={onBuy}
+        disabled={buyDisabled}
+      >
         Comprar
       </button>
     </div>

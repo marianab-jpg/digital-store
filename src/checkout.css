@@ -1,0 +1,276 @@
+.checkout-page > h1 {
+  margin: 0 0 16px;
+  font-size: 32px;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.checkout-layout > form {
+  min-width: 0;
+}
+
+.payment-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0 0 24px;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+}
+
+.payment-methods legend {
+  margin-bottom: 16px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.payment-methods label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.payment-methods input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: #c92071;
+}
+
+.payment-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.payment-holder {
+  grid-column: 1 / -1;
+}
+
+.payment-note {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.checkout-final-total,
+.receipt-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.checkout-final-total > strong:last-child {
+  color: #ee4266;
+}
+
+.checkout-pay {
+  width: 100%;
+  padding: 16px 24px;
+  border: 0;
+  border-radius: 8px;
+  background: #f6aa1c;
+  color: white;
+  font: inherit;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.checkout-pay:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.checkout-pay:focus-visible,
+.receipt-print:focus-visible {
+  outline: 2px solid #c92071;
+  outline-offset: 4px;
+}
+
+.checkout-summary-items {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.checkout-summary-items > div,
+.receipt-product {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.checkout-summary-items img,
+.receipt-product img {
+  flex: 0 0 70px;
+  width: 70px;
+  height: 70px;
+  padding: 8px;
+  border-radius: 4px;
+  background: #e2e3ff;
+  object-fit: contain;
+}
+
+.checkout-summary-items span {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.checkout-summary-items small {
+  display: block;
+  margin-top: 8px;
+  color: #8f8f8f;
+  font-weight: normal;
+}
+
+.receipt-page {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.receipt-card {
+  padding: 32px;
+  border-radius: 4px;
+  background: white;
+}
+
+.receipt-heading {
+  text-align: center;
+}
+
+.receipt-heading > span {
+  font-size: 48px;
+}
+
+.receipt-heading h1 {
+  margin: 16px 0;
+  font-size: 28px;
+}
+
+.receipt-heading p {
+  font-size: 12px;
+}
+
+.receipt-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #cccccc;
+}
+
+.receipt-section h2 {
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+.receipt-section dl {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.receipt-section dl > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.receipt-section dt {
+  color: #8f8f8f;
+}
+
+.receipt-section dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.receipt-product {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.receipt-product p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.receipt-total {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid #ffe9c8;
+  border-radius: 4px;
+  background: #fffaf3;
+}
+
+.receipt-print {
+  display: block;
+  margin: 24px auto 0;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: #666666;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.receipt-home {
+  display: block;
+  margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .checkout-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .payment-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .receipt-card {
+    padding: 24px 16px;
+  }
+
+  .receipt-total {
+    padding: 16px;
+    font-size: 20px;
+  }
+}
+
+@media print {
+  .header,
+  .footer,
+  .receipt-print,
+  .receipt-home {
+    display: none;
+  }
+
+  .main {
+    max-width: none;
+    padding: 0;
+  }
+
+  .receipt-card {
+    padding: 0;
+  }
+
+  body {
+    background: white;
+  }
+}
