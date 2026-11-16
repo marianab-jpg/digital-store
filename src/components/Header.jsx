@@ -11,18 +11,31 @@ import {
   useNavigate,
 } from 'react-router-dom'
 import Logo from './Logo'
-import miniCart from '../assets/mini-cart.svg'
+import MiniCart from './MiniCart'
 import {
   getDemoSessionSnapshot,
   logoutDemoAccount,
   readDemoSession,
   subscribeDemoSession,
 } from '../utils/demoAuth'
-import {
-  useCart,
-  clearCart,
-  formatCartMoney,
-} from '../hooks/useCart'
+import '../header.css'
+
+function SearchIcon() {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden="true"
+    >
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m16 16 5 5" />
+    </svg>
+  )
+}
 
 export default function Header() {
   const navigate = useNavigate()
@@ -35,49 +48,92 @@ export default function Header() {
   )
 
   const session = readDemoSession(snapshot)
+
   const firstName =
     session?.fullName.trim().split(/\s+/)[0] || 'cliente'
 
-  const cart = useCart()
   const [cartOpen, setCartOpen] = useState(false)
-  const cartRef = useRef(null)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+
+  const menuRef = useRef(null)
+  const searchRef = useRef(null)
 
   const isProductsPage =
     ['/products', '/produtos', '/carrinho', '/checkout'].includes(
       pathname
-    ) || pathname.startsWith('/product/')
+    ) ||
+    pathname.startsWith('/product/') ||
+    pathname.startsWith('/compra-realizada/')
+
+  const isAccountPage = [
+    '/pedidos',
+    '/minha-conta',
+    '/metodos-de-pagamento',
+  ].includes(pathname)
 
   useEffect(() => {
-    if (!cartOpen) return
+    if (searchOpen) {
+      searchRef.current?.focus()
+    }
+  }, [searchOpen])
 
-    function handlePointer(event) {
-      if (!cartRef.current?.contains(event.target)) {
-        setCartOpen(false)
+  useEffect(() => {
+    const media = window.matchMedia('(min-width: 801px)')
+
+    function closeOnDesktop() {
+      if (media.matches && menuRef.current?.open) {
+        menuRef.current.close()
       }
     }
 
-    function handleKey(event) {
-      if (event.key === 'Escape') {
-        setCartOpen(false)
-      }
-    }
-
-    document.addEventListener('pointerdown', handlePointer)
-    document.addEventListener('keydown', handleKey)
+    media.addEventListener('change', closeOnDesktop)
 
     return () => {
-      document.removeEventListener('pointerdown', handlePointer)
-      document.removeEventListener('keydown', handleKey)
+      media.removeEventListener('change', closeOnDesktop)
     }
-  }, [cartOpen])
+  }, [])
+
+  function closePanels() {
+    setCartOpen(false)
+    setSearchOpen(false)
+
+    if (menuRef.current?.open) {
+      menuRef.current.close()
+    }
+  }
+
+  function openMenu() {
+    setCartOpen(false)
+    setSearchOpen(false)
+
+    if (!menuRef.current?.open) {
+      menuRef.current?.showModal()
+      setMenuOpen(true)
+    }
+  }
+
+  function handleBackdrop(event) {
+    const rect = event.currentTarget.getBoundingClientRect()
+
+    if (
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom
+    ) {
+      closePanels()
+    }
+  }
 
   function handleSearch(event) {
     event.preventDefault()
 
-    const data = new FormData(event.currentTarget)
-    const search = String(data.get('search') || '').trim()
+    const search = String(
+      new FormData(event.currentTarget).get('search') || ''
+    ).trim()
 
-    setCartOpen(false)
+    closePanels()
 
     navigate(
       search
@@ -87,24 +143,79 @@ export default function Header() {
   }
 
   function handleLogout() {
+    closePanels()
     logoutDemoAccount()
-    setCartOpen(false)
     navigate('/')
+  }
+
+  function navigationLinks() {
+    return (
+      <>
+        <NavLink to="/" end onClick={closePanels}>
+          Home
+        </NavLink>
+
+        <Link
+          to="/products"
+          className={isProductsPage ? 'active' : undefined}
+          aria-current={isProductsPage ? 'page' : undefined}
+          onClick={closePanels}
+        >
+          Produtos
+        </Link>
+
+        <NavLink to="/categorias" onClick={closePanels}>
+          Categorias
+        </NavLink>
+
+        <Link
+          to="/pedidos"
+          className={isAccountPage ? 'active' : undefined}
+          aria-current={isAccountPage ? 'page' : undefined}
+          onClick={closePanels}
+        >
+          Meus Pedidos
+        </Link>
+      </>
+    )
   }
 
   return (
     <header className="header">
       <div className="header-top">
-        <Link
-          to="/"
-          className="logo"
-          onClick={() => setCartOpen(false)}
+        <button
+          type="button"
+          className="mobile-menu-toggle"
+          aria-label="Abrir menu de navegação"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          onClick={openMenu}
         >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            aria-hidden="true"
+          >
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+
+        <Link to="/" className="logo" onClick={closePanels}>
           <Logo />
         </Link>
 
-        <form className="search-form" onSubmit={handleSearch}>
+        <form
+          className={`search-form ${
+            searchOpen ? 'search-open' : ''
+          }`}
+          onSubmit={handleSearch}
+        >
           <input
+            ref={searchRef}
             type="search"
             name="search"
             placeholder="Pesquisar produto..."
@@ -112,26 +223,17 @@ export default function Header() {
           />
 
           <button type="submit" aria-label="Buscar">
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              aria-hidden="true"
-            >
-              <circle cx="10.5" cy="10.5" r="6.5" />
-              <path d="m16 16 5 5" />
-            </svg>
+            <SearchIcon />
           </button>
         </form>
 
         {session ? (
           <div className="header-user-account">
-            <span
+            <Link
+              to="/minha-conta"
               className="header-user-greeting"
               title={session.fullName}
+              onClick={closePanels}
             >
               <svg
                 width="24"
@@ -149,7 +251,7 @@ export default function Header() {
               <span className="header-user-name">
                 Olá, {firstName}
               </span>
-            </span>
+            </Link>
 
             <button
               type="button"
@@ -164,135 +266,109 @@ export default function Header() {
             <Link to="/cadastro" className="register-link">
               Cadastre-se
             </Link>
+
             <Link to="/login" className="login-link">
               Entrar
             </Link>
           </div>
         )}
 
-        <div className="header-cart-area" ref={cartRef}>
-          <button
-            type="button"
-            className="header-cart-button"
-            aria-label={`Carrinho de compras, ${cart.quantity} ${
-              cart.quantity === 1 ? 'item' : 'itens'
-            }`}
-            aria-expanded={cartOpen}
-            aria-controls="cart-preview"
-            onClick={() => setCartOpen(!cartOpen)}
-          >
-            <img src={miniCart} alt="" width={24} height={24} />
+        <button
+          type="button"
+          className="mobile-search-toggle"
+          aria-label={searchOpen ? 'Fechar busca' : 'Abrir busca'}
+          aria-expanded={searchOpen}
+          onClick={() => setSearchOpen(!searchOpen)}
+        >
+          <SearchIcon />
+        </button>
 
-            {cart.quantity > 0 && (
-              <span className="cart-badge">{cart.quantity}</span>
-            )}
-          </button>
-
-          {cartOpen && (
-            <section
-              className="cart-preview"
-              id="cart-preview"
-              aria-label="Resumo do carrinho"
-            >
-              <div className="cart-preview-heading">
-                <h2>Meu Carrinho</h2>
-
-                <button
-                  type="button"
-                  aria-label="Fechar resumo do carrinho"
-                  onClick={() => setCartOpen(false)}
-                >
-                  ×
-                </button>
-              </div>
-
-              {cart.items.length ? (
-                <>
-                  <div className="cart-preview-list">
-                    {cart.items.map((item) => (
-                      <Link
-                        key={item.id}
-                        to={`/product/${item.productId}`}
-                        className="cart-preview-item"
-                        onClick={() => setCartOpen(false)}
-                      >
-                        <img src={item.product.image} alt="" />
-
-                        <div>
-                          <strong>{item.product.name}</strong>
-
-                          <span>
-                            {item.quantity} ×{' '}
-                            {formatCartMoney(item.unitCents)}
-                          </span>
-
-                          <small>Tamanho {item.size}</small>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-
-                  <div className="cart-preview-total">
-                    <strong>Valor total:</strong>
-                    <strong>
-                      {formatCartMoney(cart.totalCents)}
-                    </strong>
-                  </div>
-
-                  <div className="cart-preview-actions">
-                    <button type="button" onClick={clearCart}>
-                      Esvaziar
-                    </button>
-
-                    <Link
-                      to="/carrinho"
-                      onClick={() => setCartOpen(false)}
-                    >
-                      Ver Carrinho
-                    </Link>
-                  </div>
-                </>
-              ) : (
-                <p>
-                  Seu carrinho está vazio.{' '}
-                  <Link
-                    to="/products"
-                    onClick={() => setCartOpen(false)}
-                  >
-                    Explorar produtos
-                  </Link>
-                </p>
-              )}
-            </section>
-          )}
-        </div>
+        <MiniCart
+          open={cartOpen}
+          onOpenChange={setCartOpen}
+        />
       </div>
 
       <nav className="navigation" aria-label="Navegação principal">
-        <NavLink to="/" end onClick={() => setCartOpen(false)}>
-          Home
-        </NavLink>
-
-        <Link
-          to="/products"
-          className={isProductsPage ? 'active' : undefined}
-          aria-current={isProductsPage ? 'page' : undefined}
-          onClick={() => setCartOpen(false)}
-        >
-          Produtos
-        </Link>
-
-        <NavLink
-          to="/categorias"
-          onClick={() => setCartOpen(false)}
-        >
-          Categorias
-        </NavLink>
-
-        <NavLink to="/pedidos" onClick={() => setCartOpen(false)}>
-          Meus Pedidos
-        </NavLink>
+        {navigationLinks()}
       </nav>
+
+      <dialog
+        className="mobile-menu"
+        id="mobile-menu"
+        ref={menuRef}
+        aria-labelledby="mobile-menu-title"
+        onClose={() => setMenuOpen(false)}
+        onClick={handleBackdrop}
+      >
+        <div className="mobile-menu-heading">
+          <h2 id="mobile-menu-title">Menu</h2>
+
+          <button
+            type="button"
+            aria-label="Fechar menu de navegação"
+            onClick={closePanels}
+          >
+            ×
+          </button>
+        </div>
+
+        {session && (
+          <div className="mobile-account-links">
+            <strong>Olá, {firstName}</strong>
+
+            <Link to="/minha-conta" onClick={closePanels}>
+              Minhas Informações
+            </Link>
+
+            <Link
+              to="/metodos-de-pagamento"
+              onClick={closePanels}
+            >
+              Métodos de Pagamento
+            </Link>
+          </div>
+        )}
+
+        <h3>Páginas</h3>
+
+        <nav
+          className="mobile-menu-links"
+          aria-label="Navegação móvel"
+        >
+          {navigationLinks()}
+        </nav>
+
+        <div className="mobile-menu-account">
+          {session ? (
+            <button
+              type="button"
+              className="logout-button"
+              onClick={handleLogout}
+            >
+              Sair
+            </button>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="login-link"
+                onClick={closePanels}
+              >
+                Entrar
+              </Link>
+
+              <Link
+                to="/cadastro"
+                className="register-link"
+                onClick={closePanels}
+              >
+                Cadastre-se
+              </Link>
+            </>
+          )}
+        </div>
+      </dialog>
     </header>
   )
 }

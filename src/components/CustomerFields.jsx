@@ -75,7 +75,10 @@ const groups = [
   },
 ]
 
-export default function CustomerFields({ defaultValues = {} }) {
+export default function CustomerFields({
+  defaultValues = {},
+  emailReadOnly = false,
+}) {
   return groups.map((group) => (
     <section className="form-panel" key={group.title}>
       <h2>{group.title}</h2>
@@ -93,6 +96,7 @@ export default function CustomerFields({ defaultValues = {} }) {
                 {...attributes}
                 name={name}
                 required={required}
+                readOnly={name === 'email' && emailReadOnly}
                 defaultValue={defaultValues[name] || ''}
               />
             </label>

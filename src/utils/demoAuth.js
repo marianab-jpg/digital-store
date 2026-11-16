@@ -114,7 +114,6 @@ export async function loginDemoAccount(email, password) {
   )
 
   notifySessionChange()
-
   return true
 }
 
@@ -138,4 +137,67 @@ export function readDemoSession(
 export function logoutDemoAccount() {
   sessionStorage.removeItem(SESSION_KEY)
   notifySessionChange()
+}
+
+export function updateDemoProfile(updates) {
+  const profile = readValue(PROFILE_KEY)
+  const session = readDemoSession()
+
+  if (
+    !session ||
+    typeof profile?.email !== 'string' ||
+    profile.email.trim().toLowerCase() !==
+      session.email.trim().toLowerCase()
+  ) {
+    throw new Error('Entre novamente para editar seus dados.')
+  }
+
+  const fields = [
+    'fullName',
+    'cpf',
+    'phone',
+    'address',
+    'neighborhood',
+    'city',
+    'postalCode',
+    'complement',
+  ]
+
+  const updated = { ...profile }
+
+  fields.forEach((name) => {
+    updated[name] = String(
+      updates[name] ?? profile[name] ?? ''
+    ).trim()
+  })
+
+  if (
+    fields.some(
+      (name) => name !== 'complement' && !updated[name]
+    )
+  ) {
+    throw new Error('Preencha todos os campos obrigatórios.')
+  }
+
+  if (updated.fullName.length < 3) {
+    throw new Error(
+      'Informe um nome com pelo menos três caracteres.'
+    )
+  }
+
+  sessionStorage.setItem(
+    PROFILE_KEY,
+    JSON.stringify(updated)
+  )
+
+  sessionStorage.setItem(
+    SESSION_KEY,
+    JSON.stringify({
+      ...session,
+      fullName: updated.fullName,
+    })
+  )
+
+  notifySessionChange()
+  return updated
 }

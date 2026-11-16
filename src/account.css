@@ -1,0 +1,282 @@
+.account-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.account-sidebar,
+.account-panel {
+  min-width: 0;
+  padding: 24px;
+  border-radius: 4px;
+  background: white;
+}
+
+.account-sidebar h2 {
+  margin: 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #cccccc;
+  font-size: 14px;
+}
+
+.account-menu {
+  display: grid;
+}
+
+.account-menu a {
+  padding: 20px 0;
+  border-bottom: 1px solid #cccccc;
+  color: #474747;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.account-menu a:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.account-menu a.active {
+  color: #c92071;
+  font-weight: bold;
+}
+
+.account-content {
+  min-width: 0;
+}
+
+.account-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.account-panel-heading h1 {
+  margin: 0;
+  color: #474747;
+  font-size: 16px;
+}
+
+.orders-status-heading {
+  font-size: 12px;
+}
+
+.order-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 170px;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+  border-bottom: 1px solid #cccccc;
+}
+
+.order-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.order-product {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  color: #474747;
+  text-decoration: none;
+}
+
+.order-product > img {
+  flex: 0 0 70px;
+  width: 70px;
+  height: 70px;
+  padding: 8px;
+  border-radius: 4px;
+  background: #e2e3ff;
+  object-fit: contain;
+}
+
+.order-product > div {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.order-product small,
+.order-product span {
+  color: #8f8f8f;
+  font-size: 12px;
+}
+
+.order-product strong {
+  font-size: 14px;
+}
+
+.order-status {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.order-status.pending {
+  color: #996400;
+}
+
+.order-status.finished {
+  color: #666666;
+}
+
+.order-mobile-status {
+  display: none;
+}
+
+.order-details-link {
+  grid-column: 1 / -1;
+  justify-self: end;
+  color: #c92071;
+  font-size: 13px;
+}
+
+.account-info-section {
+  padding: 24px 0;
+  border-bottom: 1px solid #cccccc;
+}
+
+.account-info-section:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.account-info-section h2,
+.saved-method h2 {
+  margin: 0 0 16px;
+  font-size: 14px;
+}
+
+.account-info-section dl {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.account-info-section dl > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.account-info-section dt {
+  color: #8f8f8f;
+}
+
+.account-info-section dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.account-empty {
+  padding-top: 16px;
+}
+
+.account-note,
+.saved-method p {
+  color: #666666;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.saved-method {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+@media (max-width: 800px) {
+  .account-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .account-sidebar,
+  .account-panel {
+    padding: 24px 16px;
+  }
+
+  .orders-status-heading {
+    display: none;
+  }
+
+  .order-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .order-status {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    text-align: right;
+  }
+
+  .order-mobile-status {
+    display: inline;
+    color: #474747;
+    font-size: 12px;
+    font-weight: normal;
+  }
+}
+/* Edição do perfil */
+
+.account-edit-button,
+.account-cancel-button {
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: #c92071;
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.account-edit-form {
+  margin-top: 24px;
+}
+
+.account-edit-form .form-panel {
+  padding: 20px 0;
+}
+
+.account-edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.account-edit-actions .form-primary-button {
+  width: auto;
+}
+
+.form-field input[readonly] {
+  background: #eeeeee;
+  color: #666666;
+}
+
+@media (max-width: 600px) {
+  .account-edit-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+@media (max-width: 800px) {
+  .account-sidebar {
+    display: none;
+  }
+}

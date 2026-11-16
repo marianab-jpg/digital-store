@@ -8,6 +8,8 @@ import LoginPage from './pages/LoginPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
 import OrderConfirmationPage from './pages/OrderConfirmationPage'
+import OrdersPage from './pages/OrdersPage'
+import AccountPage from './pages/AccountPage'
 import InfoPage from './pages/InfoPage'
 import './App.css'
 
@@ -46,22 +48,21 @@ function App() {
             element={<OrderConfirmationPage />}
           />
 
+          <Route path="/pedidos" element={<OrdersPage />} />
+
+          <Route path="/minha-conta" element={<AccountPage />} />
+
+          <Route
+            path="/metodos-de-pagamento"
+            element={<AccountPage view="payments" />}
+          />
+
           <Route
             path="/categorias"
             element={
               <InfoPage
                 title="Categorias"
                 description="Explore nossa seleção de tênis esportivos e casuais."
-              />
-            }
-          />
-
-          <Route
-            path="/pedidos"
-            element={
-              <InfoPage
-                title="Meus Pedidos"
-                description="A consulta de pedidos está indisponível nesta loja demonstrativa."
               />
             }
           />

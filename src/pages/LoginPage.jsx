@@ -1,10 +1,29 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
 import { loginDemoAccount } from '../utils/demoAuth'
 import '../forms.css'
 
 export default function LoginPage() {
   const navigate = useNavigate()
+  const location = useLocation()
+
+  const allowedDestinations = [
+    '/pedidos',
+    '/minha-conta',
+    '/metodos-de-pagamento',
+    '/checkout',
+  ]
+
+  const destination = allowedDestinations.includes(
+    location.state?.from
+  )
+    ? location.state.from
+    : '/products'
+
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -19,7 +38,10 @@ export default function LoginPage() {
     setBusy(true)
 
     try {
-      const authenticated = await loginDemoAccount(email, password)
+      const authenticated = await loginDemoAccount(
+        email,
+        password
+      )
 
       if (!authenticated) {
         setMessage(
@@ -28,7 +50,7 @@ export default function LoginPage() {
         return
       }
 
-      navigate('/products')
+      navigate(destination, { replace: true })
     } catch {
       setMessage(
         'Não foi possível entrar. Use o endereço localhost e confira as permissões de armazenamento do navegador.'
@@ -56,7 +78,6 @@ export default function LoginPage() {
         <form className="customer-form" onSubmit={handleSubmit}>
           <label className="form-field">
             <span>E-mail *</span>
-
             <input
               name="email"
               type="email"
@@ -68,7 +89,6 @@ export default function LoginPage() {
 
           <label className="form-field">
             <span>Senha *</span>
-
             <input
               name="password"
               type="password"
