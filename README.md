@@ -1,104 +1,133 @@
 # Digital Store
 
-Projeto educacional de front-end de uma loja virtual.
-
-## Autoria
-
-Mariana Vitória Bernardino Nicolau
+Projeto final de Front-end desenvolvido por **Mariana Vitória Bernardino Nicolau**, utilizando React e Vite, com base na documentação do Digital Store e no design disponibilizado no Figma.
 
 ## Tecnologias
 
 - React
-- JavaScript
-- Vite
 - React Router
+- JavaScript
 - CSS
+- Vite
 - ESLint
+
+## Funcionalidades
+
+### Catálogo
+
+- Página inicial com carrossel, coleções e produtos em destaque.
+- Listagem com busca, filtros e ordenação.
+- Página de detalhes com galeria de imagens.
+- Seleção de tamanho e cor.
+- Nome da cor exibido ao passar o mouse sobre a opção.
+- Produtos relacionados.
+
+### Cadastro e perfil
+
+- Cadastro com informações pessoais, endereço e senha.
+- Login demonstrativo com validação de credenciais.
+- Nome do usuário atualizado no cabeçalho após o login.
+- Edição dos dados do perfil.
+- Consulta dos pedidos vinculados ao e-mail da sessão.
+- Logout.
+
+### Compra demonstrativa
+
+- Carrinho com quantidade, tamanho e cor dos produtos.
+- Prévia do carrinho no cabeçalho.
+- Remoção de itens e opção de esvaziar o carrinho.
+- Cupom `DRIP10`, que aplica 10% de desconto.
+- Simulação de frete gratuito mediante preenchimento do CEP.
+- Checkout com dados pessoais, entrega e pagamento.
+- Simulação de pagamento por cartão ou boleto.
+- Confirmação da compra e impressão do comprovante.
+
+### Interface
+
+- Layout adaptado para desktop e dispositivos móveis.
+- Menu lateral e busca no cabeçalho mobile.
+- Formulários com validação de campos obrigatórios.
 
 ## Como executar
 
 É necessário ter Node.js e npm instalados.
 
-Abra um terminal na pasta do projeto e execute:
+Clone o repositório:
+
+```bash
+git clone https://github.com/marianab-jpg/digital-store.git
+cd digital-store
+```
+
+Instale as dependências:
 
 ```bash
 npm install
+```
+
+Inicie o servidor de desenvolvimento:
+
+```bash
 npm run dev
 ```
 
-Acesse o endereço informado pelo terminal.
+Abra o endereço informado no terminal.
 
-No PowerShell, caso a execução de `npm` seja bloqueada, utilize `npm.cmd`.
+No PowerShell, caso a execução de `npm.ps1` esteja bloqueada, utilize `npm.cmd` no lugar de `npm`.
 
-## Verificações
+## Verificação
+
+Gerar a versão de produção:
 
 ```bash
-npm run lint
 npm run build
 ```
 
-O build gera a versão de produção na pasta `dist`.
+Verificar o código com ESLint:
 
-Para visualizar essa versão localmente:
+```bash
+npm run lint
+```
+
+Visualizar a versão de produção localmente:
 
 ```bash
 npm run preview
 ```
 
-## Funcionalidades
+## Como testar o fluxo de compra
 
-- Home com banner em carrossel, coleções, categorias e oferta especial.
-- Oito produtos em alta.
-- Listagem com busca por nome, ordenação e filtro por preço.
-- Busca com suporte a termos sem acentos.
-- Detalhes do produto com galeria e miniaturas.
-- Seleção visual de tamanho e cor.
-- Preços, descontos e avaliações demonstrativas.
-- Produtos relacionados.
-- Layout adaptado para diferentes tamanhos de tela.
-- Tratamento de produtos e páginas não encontrados.
+1. Crie uma conta com dados fictícios.
+2. Entre com o e-mail e a senha cadastrados.
+3. Abra um produto e selecione tamanho e cor.
+4. Clique em comprar para adicioná-lo ao carrinho.
+5. Confira os itens e avance para o checkout.
+6. Preencha os campos com dados fictícios.
+7. Selecione boleto para testar sem preencher dados de cartão.
+8. Finalize a simulação e consulte o comprovante.
+9. Acesse Meus Pedidos para visualizar a compra.
 
-## Rotas principais
+## Limitações da demonstração
 
-- `/`: Home.
-- `/products`: listagem.
-- `/produtos`: endereço alternativo da listagem.
-- `/products?filter=corrida`: exemplo de busca.
-- `/product/1`: exemplo de detalhes.
+Este é um projeto educacional de Front-end.
 
-## Organização
+- Não utiliza backend nem API de autenticação.
+- Os dados ficam no navegador e podem ser perdidos ao limpar o armazenamento.
+- A sessão de login utiliza o armazenamento da aba.
+- A senha é transformada em um hash no navegador com PBKDF2. Isso não substitui uma autenticação segura com servidor.
+- Não há cobrança, emissão real de boleto ou consulta real de frete.
+- O número completo do cartão e o CVV não são salvos no pedido.
+- O catálogo utiliza dados locais e imagens ilustrativas.
+- A escolha de cor não altera a fotografia do produto.
+- As categorias sem produtos cadastrados podem retornar uma listagem vazia.
 
-- `src/assets`: logomarcas e ícones.
-- `src/components`: componentes reutilizáveis.
-- `src/data`: dados locais dos produtos.
-- `src/pages`: páginas e layout.
-- `public`: imagens públicas.
+Utilize apenas dados fictícios nos formulários.
 
-## Limitações
+## Referências e créditos
 
-Os dados são locais e demonstrativos, sem integração com API.
+- [Documentação do projeto](https://github.com/digitalcollegebr/projeto-digital-store)
+- [Design de referência no Figma](https://www.figma.com/design/nUk0ihM3x4u8JQtxUoAEJf/DRIP-STORE---DIGITAL-COLLEGE--Copy-?node-id=22-30&p=f)
+- [Documentação do React](https://react.dev/)
+- [Repositório de referência para imagens dos produtos e banners](https://github.com/ajuteixeira/client-drip-store)
 
-Login, cadastro, categorias e pedidos possuem telas informativas.
-Não há autenticação, carrinho funcional, pagamento ou registro de compras.
-O botão Comprar é apenas visual.
-
-As avaliações são fictícias. As imagens da galeria de detalhes são compartilhadas entre os produtos.
-
-Os links das categorias realizam buscas. O catálogo atual contém apenas tênis.
-
-## Referências
-
-Documentação e materiais:
-https://github.com/digitalcollegebr/projeto-digital-store
-
-Design no Figma:
-https://www.figma.com/design/nUk0ihM3x4u8JQtxUoAEJf/DRIP-STORE---DIGITAL-COLLEGE--Copy-?node-id=22-30
-
-Imagens complementares:
-https://github.com/ajuteixeira/client-drip-store
-
-Arquivos de origem das imagens complementares:
-`hero-product.png`, `product.png` e `shoesBanner.svg`.
-A imagem de detalhes foi extraída do PNG incorporado ao arquivo
-`tenis_produto.svg`, do repositório de imagens complementares.
-Ela é compartilhada entre os produtos para demonstrar o layout.
+As imagens e marcas são utilizadas como referência visual neste projeto educacional.
